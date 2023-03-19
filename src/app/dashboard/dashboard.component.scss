@@ -4,7 +4,29 @@
   padding: 32px;
 }
 
-.klinesChart {
-  display: block;
-  width: 100%;
+.currencies {
+  display: flex;
+
+  .currencyImg {
+    margin-left: 12px;
+  }
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .klinesChart {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .pieCharts {
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+    justify-content: center;
+  }
 }

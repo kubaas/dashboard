@@ -9,12 +9,12 @@ import { BinanceService } from '../binance/binance.service';
 })
 export class DashboardStoreService implements OnDestroy {
   private readonly _subscriptions = new Subscription();
-  private _symbolsSubject = new BehaviorSubject<string[]>([]);
+  private _symbolsSubject = new BehaviorSubject<Record<string, string>>({});
   private _activeSymbol?: string;
 
   constructor(private readonly binance: BinanceService) {}
 
-  get symbols$(): Observable<string[]> {
+  get symbols$(): Observable<Record<string, string>> {
     return this._symbolsSubject.asObservable();
   }
 
@@ -39,7 +39,11 @@ export class DashboardStoreService implements OnDestroy {
     );
   }
 
-  private mapSymbols(symbolsList: SymbolsList): string[] {
-    return symbolsList.data.map((symbol) => symbol.symbol);
+  private mapSymbols(symbolsList: SymbolsList): Record<string, string> {
+    const records = {} as Record<string, string>;
+    symbolsList.data.forEach((symbol) => {
+      records[symbol.symbol] = symbol.logo;
+    });
+    return records;
   }
 }

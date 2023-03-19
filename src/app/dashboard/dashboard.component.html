@@ -1,17 +1,39 @@
-<mat-form-field appearance="fill">
-  <mat-label>Currencies</mat-label>
-  <mat-select [formControl]="currencies">
-    <mat-option *ngFor="let symbol of symbols" [value]="symbol">
-      {{ symbol }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="currencies">
+  <mat-form-field appearance="fill">
+    <mat-label>Currencies</mat-label>
+    <mat-select [formControl]="currencies">
+      <mat-option *ngFor="let symbol of symbols" [value]="symbol">
+        {{ symbol }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="currencyImg">
+    <img [src]="symbolsMap[currencies.value]" width="56" height="56" />
+  </div>
+</div>
 <mat-divider></mat-divider>
-<highcharts-chart
-  *ngIf="shouldShowChart"
-  class="klinesChart"
-  [Highcharts]="Highcharts"
-  [constructorType]="'stockChart'"
-  [options]="klinesChartOptions"
->
-</highcharts-chart>
+<div class="charts">
+  <highcharts-chart
+    *ngIf="shouldShowChart"
+    class="klinesChart"
+    [Highcharts]="Highcharts"
+    [constructorType]="'stockChart'"
+    [options]="klinesChartOptions"
+  >
+  </highcharts-chart>
+  <mat-divider></mat-divider>
+  <div class="pieCharts">
+    <highcharts-chart
+      *ngIf="shouldShowChart"
+      [Highcharts]="Highcharts"
+      [options]="pieChartOptions"
+    >
+    </highcharts-chart>
+    <highcharts-chart
+      *ngIf="shouldShowChart"
+      [Highcharts]="Highcharts"
+      [options]="pieChartOptions"
+    >
+    </highcharts-chart>
+  </div>
+</div>
