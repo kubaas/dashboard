@@ -7,9 +7,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() title = '';
+  @Input() signOut = '';
   @Output() toggleSideBar = new EventEmitter<void>();
+  @Output() helpClicked = new EventEmitter<void>();
 
-  toggleSideBar2(): void {
+  onMenuClick(): void {
     this.toggleSideBar.emit();
+  }
+
+  onHelpClick(): void {
+    this.helpClicked.emit();
   }
 }

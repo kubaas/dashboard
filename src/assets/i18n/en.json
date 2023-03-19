@@ -1,5 +1,22 @@
 {
-  "shared": {
-    "headerTitle": "Dashboard App"
+  "header": {
+    "title": "Dashboard App",
+    "signOut": "Sign out"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "gainersAndLosers": "Gainers And Losers"
+  },
+  "dialogs": {
+    "helpDialog": {
+      "title": "Dashboard Help Dialog",
+      "content": "Help dialog",
+      "okButton": "Ok"
+    }
+  },
+  "gainersAndLosers": {
+    "resultsRefresh": "Results are refreshed every 10 seconds *",
+    "topGainers": "Top Gainers",
+    "topLosers": "Top Losers"
   }
 }

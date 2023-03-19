@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarComponent } from './calendar.component';
+import { HelpDialogComponent } from './help-dialog.component';
 
-describe('CalendarComponent', () => {
-  let component: CalendarComponent;
-  let fixture: ComponentFixture<CalendarComponent>;
+describe('HelpDialogComponent', () => {
+  let component: HelpDialogComponent;
+  let fixture: ComponentFixture<HelpDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CalendarComponent],
+      declarations: [HelpDialogComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CalendarComponent);
+    fixture = TestBed.createComponent(HelpDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

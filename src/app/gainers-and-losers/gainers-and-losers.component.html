@@ -1,0 +1,23 @@
+<div class="header">
+  <h3 class="results-info">
+    {{ 'gainersAndLosers.resultsRefresh' | translate }}
+  </h3>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="refreshProgress"
+  ></mat-progress-bar>
+</div>
+<div class="gainers-and-losers">
+  <div class="gainers">
+    <h1>{{ 'gainersAndLosers.topGainers' | translate }}</h1>
+    <dashboard-gainers-and-losers-table
+      [data]="gainers"
+    ></dashboard-gainers-and-losers-table>
+  </div>
+  <div class="losers">
+    <h1>{{ 'gainersAndLosers.topLosers' | translate }}</h1>
+    <dashboard-gainers-and-losers-table
+      [data]="losers"
+    ></dashboard-gainers-and-losers-table>
+  </div>
+</div>

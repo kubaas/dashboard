@@ -4,15 +4,33 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
-  imports: [CommonModule, FlexLayoutModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule],
-  declarations: [FooterComponent, HeaderComponent, SidebarComponent],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatToolbarModule,
+    RouterModule,
+  ],
+  declarations: [
+    FooterComponent,
+    HeaderComponent,
+    SidebarComponent,
+    LogoutComponent,
+  ],
   exports: [FooterComponent, HeaderComponent, SidebarComponent],
 })
 export class LibsSharedModule {}

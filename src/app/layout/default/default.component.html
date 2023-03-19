@@ -1,11 +1,19 @@
-<shared-header [title]="'shared.headerTitle' | translate" (toggleSideBar)="toggleSideBar"></shared-header>
+<shared-header
+  [title]="'header.title' | translate"
+  [signOut]="'header.signOut' | translate"
+  (toggleSideBar)="toggleSideBar()"
+  (helpClicked)="helpClicked()"
+></shared-header>
 
 <mat-drawer-container>
-  <mat-drawer mode="side" [opened]="sideBarOpen">
-    <shared-sidebar></shared-sidebar>
+  <mat-drawer mode="over" [opened]="sideBarOpen">
+    <shared-sidebar
+      [dashboard]="'sidebar.dashboard' | translate"
+      [gainersAndLosers]="'sidebar.gainersAndLosers' | translate"
+    ></shared-sidebar>
   </mat-drawer>
   <mat-drawer-content>
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
 
