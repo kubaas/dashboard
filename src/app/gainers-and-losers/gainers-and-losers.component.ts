@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 import { map, mergeMap, startWith } from 'rxjs/operators';
 import { Ticker24HR } from 'src/core/services/binance/binance.model';
 import { BinanceService } from 'src/core/services/binance/binance.service';
+import { DashboardStoreService } from 'src/core/services/dashboard-store/dashboard-store.service';
 
 export type MappedTickers = Pick<
   Ticker24HR,
@@ -21,10 +22,19 @@ export class GainersAndLosersComponent implements OnInit, OnDestroy {
   gainers: MappedTickers[] = [];
   losers: MappedTickers[] = [];
   refreshProgress = 0;
+  symbolsMap: Record<string, string> = {};
 
-  constructor(private readonly binance: BinanceService) {}
+  constructor(
+    private readonly binance: BinanceService,
+    private readonly store: DashboardStoreService
+  ) {}
 
   ngOnInit(): void {
+    this._subscriptions.add(
+      this.store.symbols$.subscribe(
+        (symbolsMap) => (this.symbolsMap = symbolsMap)
+      )
+    );
     this._subscriptions.add(
       interval(1000).subscribe((time) => (this.refreshProgress += 10))
     );

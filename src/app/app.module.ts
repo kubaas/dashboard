@@ -11,6 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { LibsAgGridModule } from '@dashboard/ag-grid';
 import { LibsSharedModule } from '@dashboard/libs/shared';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -41,6 +42,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
     AgGridModule,
     BrowserModule,
     BrowserAnimationsModule,
+    LibsAgGridModule,
     LibsSharedModule,
     HighchartsChartModule,
     HttpClientModule,

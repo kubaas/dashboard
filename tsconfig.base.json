@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dashboard/ag-grid": ["libs/ag-grid/src/index.ts"],
       "@dashboard/libs/shared": ["libs/shared/src/index.ts"]
     }
   },

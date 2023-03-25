@@ -1,12 +1,12 @@
 <shared-header
   [title]="'header.title' | translate"
   [signOut]="'header.signOut' | translate"
-  (toggleSideBar)="toggleSideBar()"
-  (helpClicked)="helpClicked()"
+  (toggleSideBar)="onToggleSideBar()"
+  (helpClicked)="onHelpClicked()"
 ></shared-header>
 
 <mat-drawer-container>
-  <mat-drawer mode="over" [opened]="sideBarOpen">
+  <mat-drawer mode="over" [opened]="sideBarOpen" (closed)="onCloseSideBar()">
     <shared-sidebar
       [dashboard]="'sidebar.dashboard' | translate"
       [gainersAndLosers]="'sidebar.gainersAndLosers' | translate"

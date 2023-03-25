@@ -12,12 +12,14 @@
     <h1>{{ 'gainersAndLosers.topGainers' | translate }}</h1>
     <dashboard-gainers-and-losers-table
       [data]="gainers"
+      [symbolsMap]="symbolsMap"
     ></dashboard-gainers-and-losers-table>
   </div>
   <div class="losers">
     <h1>{{ 'gainersAndLosers.topLosers' | translate }}</h1>
     <dashboard-gainers-and-losers-table
       [data]="losers"
+      [symbolsMap]="symbolsMap"
     ></dashboard-gainers-and-losers-table>
   </div>
 </div>

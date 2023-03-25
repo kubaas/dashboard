@@ -1,0 +1,7 @@
+<span class="text-with-image">
+  {{ text }}
+  <img class="image" *ngIf="imgSource; else placeholder" [src]="imgSource" />
+</span>
+<ng-template #placeholder>
+  <mat-icon class="broken-image">broken_image</mat-icon>
+</ng-template>

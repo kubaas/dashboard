@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ColDef } from 'ag-grid-community';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { DomLayoutType, GridOptions } from 'ag-grid-community';
 import { MappedTickers } from '../gainers-and-losers.component';
+import { GainersAndLosersTableConfig as Config } from './gainers-and-losers-table.config';
 
 @Component({
   selector: 'dashboard-gainers-and-losers-table',
@@ -8,30 +15,30 @@ import { MappedTickers } from '../gainers-and-losers.component';
   styleUrls: ['./gainers-and-losers-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GainersAndLosersTableComponent {
-  @Input() data?: MappedTickers[];
+export class GainersAndLosersTableComponent implements OnChanges {
+  @Input() data: MappedTickers[] = [];
+  @Input() symbolsMap: Record<string, string> = {};
 
-  columnDefs: ColDef[] = [
-    {
-      field: '#',
-      width: 100,
-      valueGetter: (node) => Number(node.node?.rowIndex) + 1,
+  gridOptions: GridOptions = {
+    defaultColDef: {
+      filter: true,
+      floatingFilter: true,
+      resizable: true,
+      sortable: true,
     },
-    { field: 'symbol', width: 115 },
-    { field: 'lastPrice', width: 153 },
-    {
-      field: 'priceChangePercent',
-      width: 195,
-      valueFormatter: (node) => (node.value > 0 ? '+' : '') + node.value + ' %',
-      cellStyle: (params) =>
-        params.value > 0 ? { color: 'green' } : { color: 'red' },
-    },
-  ];
-
-  defaultColDef: ColDef = {
-    filter: true,
-    floatingFilter: true,
-    resizable: true,
-    sortable: true,
+    columnDefs: [],
+    rowStyle: { alignItems: 'center' },
   };
+
+  domLayout: DomLayoutType = 'autoHeight';
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['symbolsMap'] && this.gridOptions.api) {
+      this.gridOptions.api.setColumnDefs(Config.columnDefs(this.symbolsMap));
+    }
+  }
+
+  onGridReady(): void {
+    this.gridOptions.api!.setColumnDefs(Config.columnDefs(this.symbolsMap));
+  }
 }
