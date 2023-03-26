@@ -4,7 +4,10 @@ import { interval, Subscription } from 'rxjs';
 import { map, mergeMap, startWith } from 'rxjs/operators';
 import { Ticker24HR } from 'src/core/services/binance/binance.model';
 import { BinanceService } from 'src/core/services/binance/binance.service';
-import { DashboardStoreService } from 'src/core/services/dashboard-store/dashboard-store.service';
+import {
+  DashboardStoreService,
+  MappedSymbols,
+} from 'src/core/services/dashboard-store/dashboard-store.service';
 
 export type MappedTickers = Pick<
   Ticker24HR,
@@ -22,7 +25,7 @@ export class GainersAndLosersComponent implements OnInit, OnDestroy {
   gainers: MappedTickers[] = [];
   losers: MappedTickers[] = [];
   refreshProgress = 0;
-  symbolsMap: Record<string, string> = {};
+  symbolsMap: MappedSymbols[] = [];
 
   constructor(
     private readonly binance: BinanceService,

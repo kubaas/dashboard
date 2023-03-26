@@ -1,6 +1,10 @@
 <mat-nav-list>
   <h2 matSubheader>Pages</h2>
-  <a mat-list-item routerLink="/">
+  <a
+    mat-list-item
+    routerLink="/dashboard"
+    [queryParams]="{ currency, interval}"
+  >
     <mat-icon>dashboard</mat-icon>
     {{ dashboard }}
   </a>

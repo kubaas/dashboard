@@ -9,18 +9,10 @@ export const routes: Routes = [
     path: '',
     component: DefaultComponent,
     children: [
-      {
-        path: '',
-        component: DashboardComponent,
-      },
-      {
-        path: 'gainers-and-losers',
-        component: GainersAndLosersComponent,
-      },
-      {
-        path: 'logout',
-        component: LogoutComponent,
-      },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'gainers-and-losers', component: GainersAndLosersComponent },
+      { path: 'logout', component: LogoutComponent },
     ],
   },
 ];

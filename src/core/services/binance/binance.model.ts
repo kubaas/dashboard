@@ -1,3 +1,21 @@
+export type KlineBarsInterval =
+  | '1s'
+  | '1m'
+  | '3m'
+  | '5m'
+  | '15m'
+  | '30m'
+  | '1h'
+  | '2h'
+  | '4h'
+  | '6h'
+  | '8h'
+  | '12h'
+  | '1d'
+  | '3d'
+  | '1w'
+  | '1M';
+
 export interface Ticker24HR {
   askPrice: string;
   askQty: string;
@@ -35,7 +53,7 @@ export interface Symbol {
   circulatingSupply: number;
   cmcUniqueId: number;
   dayChange: number;
-  dayChangeAmount: number;
+  dayChangeAmount: number | null;
   fullName: string;
   hidden: number;
   highLight: number;

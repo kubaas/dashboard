@@ -4,17 +4,37 @@
   (toggleSideBar)="onToggleSideBar()"
   (helpClicked)="onHelpClicked()"
 ></shared-header>
-
+<div
+  class="animated-scrollbar"
+  style="height: 40px; display: flex; align-items: center; overflow: hidden"
+>
+  <div class="animated-scrollbar-values">
+    <span
+      style="margin-left: 8px"
+      *ngFor="let symbol of symbols"
+      [ngClass]="symbol.dayChangeAmount ?? 0 >= 0 ? 'green' : 'red'"
+    >
+      {{
+        symbol.symbol +
+          ' ' +
+          (symbol.dayChangeAmount ?? 0 > 0 ? '+' : '') +
+          (symbol.dayChangeAmount ?? 0 | number : '.2-2') +
+          '%'
+      }}
+    </span>
+  </div>
+</div>
 <mat-drawer-container>
   <mat-drawer mode="over" [opened]="sideBarOpen" (closed)="onCloseSideBar()">
     <shared-sidebar
       [dashboard]="'sidebar.dashboard' | translate"
       [gainersAndLosers]="'sidebar.gainersAndLosers' | translate"
+      [currency]="currency"
+      [interval]="interval"
     ></shared-sidebar>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
-
 <shared-footer></shared-footer>

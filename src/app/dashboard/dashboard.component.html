@@ -8,8 +8,16 @@
     </mat-select>
   </mat-form-field>
   <div class="currencyImg">
-    <img [src]="symbolsMap[currencies.value]" width="56" height="56" />
+    <img [src]="symbolsWithImgs[currencies.value]" width="56" height="56" />
   </div>
+  <mat-chip-listbox class="interval-chips" [formControl]="intervalControl">
+    <mat-chip-option
+      *ngFor="let interval of intervals"
+      [selectable]="intervalControl.value !== interval"
+    >
+      {{ interval }}
+    </mat-chip-option>
+  </mat-chip-listbox>
 </div>
 <mat-divider></mat-divider>
 <div class="charts">
@@ -17,23 +25,7 @@
     *ngIf="shouldShowChart"
     class="klinesChart"
     [Highcharts]="Highcharts"
-    [constructorType]="'stockChart'"
     [options]="klinesChartOptions"
   >
   </highcharts-chart>
-  <mat-divider></mat-divider>
-  <div class="pieCharts">
-    <highcharts-chart
-      *ngIf="shouldShowChart"
-      [Highcharts]="Highcharts"
-      [options]="pieChartOptions"
-    >
-    </highcharts-chart>
-    <highcharts-chart
-      *ngIf="shouldShowChart"
-      [Highcharts]="Highcharts"
-      [options]="pieChartOptions"
-    >
-    </highcharts-chart>
-  </div>
 </div>

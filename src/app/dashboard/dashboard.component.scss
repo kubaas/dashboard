@@ -1,32 +1,35 @@
 :host {
-  display: block;
-  height: calc(100vh - 62px - 64px - 48px - 16px - 16px - 28px - 4px);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 62px - 64px - 48px - 16px);
   padding: 32px;
 }
 
 .currencies {
-  display: flex;
+  display: inherit;
+  flex-wrap: wrap;
 
   .currencyImg {
     margin-left: 12px;
   }
+
+  .interval-chips {
+    align-content: center;
+    align-items: center;
+    margin-left: 24px;
+    margin-bottom: 20px;
+  }
 }
 
 .charts {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: inherit;
+  flex-direction: inherit;
+  flex-grow: 1;
+  margin-top: 32px;
 
   .klinesChart {
-    display: flex;
+    display: inherit;
     flex-grow: 1;
     width: 100%;
-  }
-
-  .pieCharts {
-    display: flex;
-    flex-direction: row;
-    height: 400px;
-    justify-content: center;
   }
 }

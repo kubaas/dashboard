@@ -1,7 +1,19 @@
-import { ColDef } from 'ag-grid-community';
+import { ColDef, GridOptions } from 'ag-grid-community';
 import { TextWithImageRendererComponent } from 'libs/ag-grid/src/lib/text-with-image-renderer/text-with-image-renderer.component';
 
 export namespace GainersAndLosersTableConfig {
+  export const gridOptions: GridOptions = {
+    defaultColDef: {
+      filter: true,
+      floatingFilter: true,
+      resizable: true,
+      sortable: true,
+    },
+    columnDefs: [],
+    rowStyle: { alignItems: 'center' },
+    domLayout: 'autoHeight',
+  };
+
   export function columnDefs(symbolsMap: Record<string, string>): ColDef[] {
     return [
       {

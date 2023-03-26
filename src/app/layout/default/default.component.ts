@@ -3,7 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HelpDialogComponent } from 'src/core/popups/help-dialog/help-dialog.component';
-import { DashboardStoreService } from 'src/core/services/dashboard-store/dashboard-store.service';
+import {
+  DashboardStoreService,
+  MappedSymbols,
+} from 'src/core/services/dashboard-store/dashboard-store.service';
 
 @Component({
   selector: 'dashboard-default',
@@ -11,11 +14,10 @@ import { DashboardStoreService } from 'src/core/services/dashboard-store/dashboa
   styleUrls: ['./default.component.scss'],
 })
 export class DefaultComponent implements OnInit, OnDestroy {
-  private static readonly DEFAULT_SYMBOL = 'BTCUSDT';
-
   private readonly _subscriptions = new Subscription();
 
   sideBarOpen = false;
+  symbolsMap: MappedSymbols[] = [];
 
   constructor(
     private readonly dialog: MatDialog,
@@ -23,12 +25,28 @@ export class DefaultComponent implements OnInit, OnDestroy {
     private readonly router: Router
   ) {}
 
+  get symbols(): MappedSymbols[] {
+    return this.symbolsMap;
+  }
+
+  get currency(): string {
+    return this.store.activeSymbol;
+  }
+
+  get interval(): string {
+    return this.store.activeInterval;
+  }
+
   ngOnInit(): void {
-    this.store.activeSymbol = DefaultComponent.DEFAULT_SYMBOL;
     this.store.prepareSymbols();
 
     this._subscriptions.add(
       this.router.events.subscribe(this.onCloseSideBar.bind(this))
+    );
+    this._subscriptions.add(
+      this.store.symbols$.subscribe(
+        (symbolsMap) => (this.symbolsMap = symbolsMap)
+      )
     );
   }
 
@@ -38,7 +56,6 @@ export class DefaultComponent implements OnInit, OnDestroy {
 
   onToggleSideBar(): void {
     this.sideBarOpen = !this.sideBarOpen;
-    console.log(this.sideBarOpen);
   }
 
   onHelpClicked(): void {

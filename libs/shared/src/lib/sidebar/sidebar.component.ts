@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 export class SidebarComponent {
   @Input() dashboard = '';
   @Input() gainersAndLosers = '';
+  @Input() currency = '';
+  @Input() interval = '';
 }

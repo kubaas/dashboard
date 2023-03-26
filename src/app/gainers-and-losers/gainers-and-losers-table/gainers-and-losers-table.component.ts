@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { DomLayoutType, GridOptions } from 'ag-grid-community';
+import { MappedSymbols } from 'src/core/services/dashboard-store/dashboard-store.service';
 import { MappedTickers } from '../gainers-and-losers.component';
 import { GainersAndLosersTableConfig as Config } from './gainers-and-losers-table.config';
 
@@ -17,28 +17,23 @@ import { GainersAndLosersTableConfig as Config } from './gainers-and-losers-tabl
 })
 export class GainersAndLosersTableComponent implements OnChanges {
   @Input() data: MappedTickers[] = [];
-  @Input() symbolsMap: Record<string, string> = {};
+  @Input() symbolsMap: MappedSymbols[] = [];
 
-  gridOptions: GridOptions = {
-    defaultColDef: {
-      filter: true,
-      floatingFilter: true,
-      resizable: true,
-      sortable: true,
-    },
-    columnDefs: [],
-    rowStyle: { alignItems: 'center' },
-  };
+  gridOptions = Config.gridOptions;
 
-  domLayout: DomLayoutType = 'autoHeight';
+  get symbols(): Record<string, string> {
+    const symbols = {} as Record<string, string>;
+    this.symbolsMap.forEach((symbol) => (symbols[symbol.symbol] = symbol.logo));
+    return symbols;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['symbolsMap'] && this.gridOptions.api) {
-      this.gridOptions.api.setColumnDefs(Config.columnDefs(this.symbolsMap));
+      this.gridOptions.api.setColumnDefs(Config.columnDefs(this.symbols));
     }
   }
 
   onGridReady(): void {
-    this.gridOptions.api!.setColumnDefs(Config.columnDefs(this.symbolsMap));
+    this.gridOptions.api!.setColumnDefs(Config.columnDefs(this.symbols));
   }
 }
