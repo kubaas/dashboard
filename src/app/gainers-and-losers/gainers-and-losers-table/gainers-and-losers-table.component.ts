@@ -5,8 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { MappedSymbols } from 'src/core/services/dashboard-store/dashboard-store.service';
-import { MappedTickers } from '../gainers-and-losers.component';
+import { MappedTickers } from '../gainers-and-losers.model';
 import { GainersAndLosersTableConfig as Config } from './gainers-and-losers-table.config';
 
 @Component({
@@ -17,23 +16,17 @@ import { GainersAndLosersTableConfig as Config } from './gainers-and-losers-tabl
 })
 export class GainersAndLosersTableComponent implements OnChanges {
   @Input() data: MappedTickers[] = [];
-  @Input() symbolsMap: MappedSymbols[] = [];
+  @Input() symbolsMap: Record<string, string> = {};
 
   gridOptions = Config.gridOptions;
 
-  get symbols(): Record<string, string> {
-    const symbols = {} as Record<string, string>;
-    this.symbolsMap.forEach((symbol) => (symbols[symbol.symbol] = symbol.logo));
-    return symbols;
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['symbolsMap'] && this.gridOptions.api) {
-      this.gridOptions.api.setColumnDefs(Config.columnDefs(this.symbols));
+      this.gridOptions.api.setColumnDefs(Config.columnDefs(this.symbolsMap));
     }
   }
 
   onGridReady(): void {
-    this.gridOptions.api!.setColumnDefs(Config.columnDefs(this.symbols));
+    this.gridOptions.api!.setColumnDefs(Config.columnDefs(this.symbolsMap));
   }
 }

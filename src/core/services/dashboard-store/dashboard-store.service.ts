@@ -26,6 +26,17 @@ export class DashboardStoreService implements OnDestroy {
     return this._symbolsSubject.asObservable();
   }
 
+  get symbolsWithImgs$(): Observable<Record<string, string>> {
+    return this.symbols$.pipe(
+      map((symbols) =>
+        symbols.reduce((map: Record<string, string>, obj) => {
+          map[obj.symbol] = obj.logo;
+          return map;
+        }, {})
+      )
+    );
+  }
+
   get activeSymbol(): string {
     return this._activeSymbol ?? '';
   }

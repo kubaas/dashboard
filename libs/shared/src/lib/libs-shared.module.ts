@@ -8,10 +8,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { AnimatedScrollbarComponent } from './animated-scrollbar/animated-scrollbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { LogoutComponent } from './logout/logout.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,14 @@ import { LogoutComponent } from './logout/logout.component';
     HeaderComponent,
     SidebarComponent,
     LogoutComponent,
+    AnimatedScrollbarComponent,
   ],
-  exports: [FooterComponent, HeaderComponent, SidebarComponent],
+  exports: [
+    FooterComponent,
+    HeaderComponent,
+    SidebarComponent,
+    LogoutComponent,
+    AnimatedScrollbarComponent,
+  ],
 })
 export class LibsSharedModule {}

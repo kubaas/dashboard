@@ -6,7 +6,7 @@ import { HelpDialogComponent } from 'src/core/popups/help-dialog/help-dialog.com
 import {
   DashboardStoreService,
   MappedSymbols,
-} from 'src/core/services/dashboard-store/dashboard-store.service';
+} from 'src/core/services/dashboard-store';
 
 @Component({
   selector: 'dashboard-default',

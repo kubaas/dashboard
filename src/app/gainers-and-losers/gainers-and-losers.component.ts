@@ -1,18 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { pick, take, takeRight } from 'lodash';
-import { interval, Subscription } from 'rxjs';
+import { interval, Observable, Subscription, tap } from 'rxjs';
 import { map, mergeMap, startWith } from 'rxjs/operators';
 import { Ticker24HR } from 'src/core/services/binance/binance.model';
 import { BinanceService } from 'src/core/services/binance/binance.service';
-import {
-  DashboardStoreService,
-  MappedSymbols,
-} from 'src/core/services/dashboard-store/dashboard-store.service';
-
-export type MappedTickers = Pick<
-  Ticker24HR,
-  'symbol' | 'lastPrice' | 'priceChangePercent'
->;
+import { DashboardStoreService } from 'src/core/services/dashboard-store';
+import { MappedTickers } from './gainers-and-losers.model';
 
 @Component({
   selector: 'dashboard-gainers-and-losers',
@@ -20,12 +13,16 @@ export type MappedTickers = Pick<
   styleUrls: ['./gainers-and-losers.component.scss'],
 })
 export class GainersAndLosersComponent implements OnInit, OnDestroy {
+  private static readonly INTERVAL_1S = 1000;
+  private static readonly INTERVAL_10S = 10 * 1000;
+
   private readonly _subscriptions = new Subscription();
 
-  gainers: MappedTickers[] = [];
-  losers: MappedTickers[] = [];
+  symbolsWithImgs$!: Observable<Record<string, string>>;
+  gainers$!: Observable<MappedTickers[]>;
+  losers$!: Observable<MappedTickers[]>;
+
   refreshProgress = 0;
-  symbolsMap: MappedSymbols[] = [];
 
   constructor(
     private readonly binance: BinanceService,
@@ -33,29 +30,28 @@ export class GainersAndLosersComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._subscriptions.add(
-      this.store.symbols$.subscribe(
-        (symbolsMap) => (this.symbolsMap = symbolsMap)
+    const gainerAndLosers$ = interval(
+      GainersAndLosersComponent.INTERVAL_10S
+    ).pipe(
+      startWith('ping'),
+      mergeMap(() =>
+        this.binance.getTicker24HR().pipe(
+          map((tickers) => tickers.map(this.mapTickers).sort(this.sortTickers)),
+          tap(() => (this.refreshProgress = 0))
+        )
       )
     );
-    this._subscriptions.add(
-      interval(1000).subscribe((time) => (this.refreshProgress += 10))
+
+    this.symbolsWithImgs$ = this.store.symbolsWithImgs$;
+    this.gainers$ = gainerAndLosers$.pipe(map((ticker) => take(ticker, 10)));
+    this.losers$ = gainerAndLosers$.pipe(
+      map((ticker) => takeRight(ticker, 10).reverse())
     );
+
     this._subscriptions.add(
-      interval(10 * 1000)
-        .pipe(
-          startWith('ping'),
-          mergeMap(() =>
-            this.binance
-              .getTicker24HR()
-              .pipe(
-                map((value) =>
-                  value.map(this.mapTickers).sort(this.sortTickers)
-                )
-              )
-          )
-        )
-        .subscribe(this.fillGainersAndLosers.bind(this))
+      interval(GainersAndLosersComponent.INTERVAL_1S).subscribe(
+        () => (this.refreshProgress += 10)
+      )
     );
   }
 
@@ -68,10 +64,4 @@ export class GainersAndLosersComponent implements OnInit, OnDestroy {
 
   private sortTickers = (a: MappedTickers, b: MappedTickers) =>
     Number(b.priceChangePercent) - Number(a.priceChangePercent);
-
-  private fillGainersAndLosers = (ticker: MappedTickers[]) => {
-    this.gainers = take(ticker, 10);
-    this.losers = takeRight(ticker, 10).reverse();
-    this.refreshProgress = 0;
-  };
 }

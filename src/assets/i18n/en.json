@@ -14,6 +14,17 @@
       "okButton": "Ok"
     }
   },
+  "dashboard": {
+    "intervals": {
+      "1h": "1 Hour",
+      "6h": "6 Hours",
+      "12h": "12 Hours",
+      "1d": "1 Day",
+      "3d": "3 Days",
+      "1w": "1 Week",
+      "1M": "1 Month"
+    }
+  },
   "gainersAndLosers": {
     "resultsRefresh": "Results are refreshed every 10 seconds *",
     "topGainers": "Top Gainers",

@@ -30,13 +30,12 @@
   .gainers,
   .losers {
     display: block;
-    height: 71.75%;
-    // width: calc(50vw - 64px);
+    height: 550px;
     width: 575px;
   }
 
   h1 {
-    margin: 16px 0;
+    margin-bottom: 16px;
     text-align: center;
   }
 }

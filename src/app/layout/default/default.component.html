@@ -4,13 +4,10 @@
   (toggleSideBar)="onToggleSideBar()"
   (helpClicked)="onHelpClicked()"
 ></shared-header>
-<div
-  class="animated-scrollbar"
-  style="height: 40px; display: flex; align-items: center; overflow: hidden"
->
-  <div class="animated-scrollbar-values">
+<div class="animated-scrollbar">
+  <dashboard-animated-scrollbar>
     <span
-      style="margin-left: 8px"
+      style="margin-left: 16px"
       *ngFor="let symbol of symbols"
       [ngClass]="symbol.dayChangeAmount ?? 0 >= 0 ? 'green' : 'red'"
     >
@@ -22,7 +19,7 @@
           '%'
       }}
     </span>
-  </div>
+  </dashboard-animated-scrollbar>
 </div>
 <mat-drawer-container>
   <mat-drawer mode="over" [opened]="sideBarOpen" (closed)="onCloseSideBar()">

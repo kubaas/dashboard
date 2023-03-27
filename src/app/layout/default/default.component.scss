@@ -20,27 +20,6 @@ mat-drawer-container {
   color: red;
 }
 
-@keyframes scroll {
-  from {
-    transform: translate(0, 0);
-  }
-
-  to {
-    transform: translate(-26100px, 0);
-  }
-}
-
 .animated-scrollbar {
-  background: #3f51b598;
-
-  &-values {
-    display: flex;
-    flex-direction: row;
-    white-space: nowrap;
-    animation: scroll 255s forwards 0s infinite;
-    animation-timing-function: linear;
-    position: absolute;
-
-    overflow-y: hidden;
-  }
+  background: #6370bd98;
 }
