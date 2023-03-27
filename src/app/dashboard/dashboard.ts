@@ -1,4 +1,4 @@
-import { KlineBarsInterval } from 'src/core/services/binance';
+import { KlineBarsInterval } from './../../core/services/binance';
 
 export function setKlinesChartOptions(
   data: number[][],

@@ -5,6 +5,7 @@ import * as Highcharts from 'highcharts/highstock';
 import { isEmpty } from 'lodash';
 import {
   combineLatest,
+  distinctUntilChanged,
   filter,
   map,
   mergeMap,
@@ -12,11 +13,14 @@ import {
   startWith,
   Subscription,
 } from 'rxjs';
-import { BinanceService, KlineBarsInterval } from 'src/core/services/binance';
+import {
+  BinanceService,
+  KlineBarsInterval,
+} from './../../core/services/binance';
 import {
   DashboardStoreService,
   MappedSymbols,
-} from 'src/core/services/dashboard-store';
+} from './../../core/services/dashboard-store';
 import { getIntervalWithLimit, setKlinesChartOptions } from './dashboard';
 
 @Component({
@@ -105,13 +109,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private navigateWhenNewControlsValues(): void {
     this._subscriptions.add(
       combineLatest([
-        this.currencies.valueChanges.pipe(startWith(this.currencies.value)),
-        this.intervalControl.valueChanges.pipe(
-          startWith(this.intervalControl.value)
+        this.currencies.valueChanges.pipe(
+          startWith(this.currencies.value),
+          distinctUntilChanged()
         ),
-      ]).subscribe(([currency, interval]) => {
+        this.intervalControl.valueChanges.pipe(
+          startWith(this.intervalControl.value),
+          distinctUntilChanged()
+        ),
+      ]).subscribe(() => {
+        const currency = this.currencies.value;
+        const interval = this.intervalControl.value;
+
         this.store.activeSymbol = currency;
         this.store.activeInterval = interval;
+        this.shouldShowChart = false;
 
         return this.router.navigate([], {
           relativeTo: this.activatedRoute,

@@ -8,7 +8,7 @@
   <dashboard-animated-scrollbar>
     <span
       style="margin-left: 16px"
-      *ngFor="let symbol of symbols"
+      *ngFor="let symbol of symbols$ | async"
       [ngClass]="symbol.dayChangeAmount ?? 0 >= 0 ? 'green' : 'red'"
     >
       {{
@@ -23,12 +23,7 @@
 </div>
 <mat-drawer-container>
   <mat-drawer mode="over" [opened]="sideBarOpen" (closed)="onCloseSideBar()">
-    <shared-sidebar
-      [dashboard]="'sidebar.dashboard' | translate"
-      [gainersAndLosers]="'sidebar.gainersAndLosers' | translate"
-      [currency]="currency"
-      [interval]="interval"
-    ></shared-sidebar>
+    <shared-sidebar [data]="(sideBarData$ | async) ?? []"></shared-sidebar>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>

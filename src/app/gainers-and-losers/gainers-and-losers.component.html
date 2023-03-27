@@ -11,6 +11,7 @@
   <div class="gainers">
     <h1>{{ 'gainersAndLosers.topGainers' | translate }}</h1>
     <dashboard-gainers-and-losers-table
+      *ngIf="gainers$ | async; else spinner"
       [data]="(gainers$ | async) ?? []"
       [symbolsMap]="(symbolsWithImgs$ | async) ?? {}"
     ></dashboard-gainers-and-losers-table>
@@ -18,8 +19,12 @@
   <div class="losers">
     <h1>{{ 'gainersAndLosers.topLosers' | translate }}</h1>
     <dashboard-gainers-and-losers-table
+      *ngIf="losers$ | async; else spinner"
       [data]="(losers$ | async) ?? []"
       [symbolsMap]="(symbolsWithImgs$ | async) ?? {}"
     ></dashboard-gainers-and-losers-table>
   </div>
 </div>
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>

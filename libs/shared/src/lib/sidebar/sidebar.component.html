@@ -1,15 +1,12 @@
 <mat-nav-list>
   <h2 matSubheader>Pages</h2>
   <a
+    *ngFor="let row of data"
     mat-list-item
-    routerLink="/dashboard"
-    [queryParams]="{ currency, interval}"
+    [routerLink]="row.routerLink"
+    [queryParams]="row.queryParams"
   >
-    <mat-icon>dashboard</mat-icon>
-    {{ dashboard }}
-  </a>
-  <a mat-list-item routerLink="/gainers-and-losers">
-    <mat-icon>trending_up</mat-icon>
-    {{ gainersAndLosers }}
+    <mat-icon>{{ row.matIcon }}</mat-icon>
+    {{ row.text }}
   </a>
 </mat-nav-list>

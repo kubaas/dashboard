@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { pick, take, takeRight } from 'lodash';
 import { interval, Observable, Subscription, tap } from 'rxjs';
 import { map, mergeMap, startWith } from 'rxjs/operators';
-import { Ticker24HR } from 'src/core/services/binance/binance.model';
-import { BinanceService } from 'src/core/services/binance/binance.service';
-import { DashboardStoreService } from 'src/core/services/dashboard-store';
+import { Ticker24HR } from './../../core/services/binance/binance.model';
+import { BinanceService } from './../../core/services/binance/binance.service';
+import { DashboardStoreService } from './../../core/services/dashboard-store';
 import { MappedTickers } from './gainers-and-losers.model';
 
 @Component({

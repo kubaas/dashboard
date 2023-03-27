@@ -30,10 +30,13 @@
 <mat-divider></mat-divider>
 <div class="charts">
   <highcharts-chart
-    *ngIf="shouldShowChart"
+    *ngIf="shouldShowChart; else spinner"
     class="klinesChart"
     [Highcharts]="Highcharts"
     [options]="klinesChartOptions"
   >
   </highcharts-chart>
 </div>
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -23,6 +23,13 @@
             "prefix": "dashboard",
             "style": "kebab-case"
           }
+        ],
+        "import/no-cycle": [
+          "error",
+          {
+            "maxDepth": 10,
+            "ignoreExternal": true
+          }
         ]
       }
     },

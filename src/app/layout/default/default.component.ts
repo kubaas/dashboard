@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { HelpDialogComponent } from 'src/core/popups/help-dialog/help-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
+import { SideBarModel } from 'libs/shared/src/lib/sidebar/sidebar.component';
+import { map, Observable, Subscription } from 'rxjs';
+import { HelpDialogComponent } from './../../../core/popups/help-dialog/help-dialog.component';
 import {
   DashboardStoreService,
   MappedSymbols,
-} from 'src/core/services/dashboard-store';
+} from './../../../core/services/dashboard-store';
 
 @Component({
   selector: 'dashboard-default',
@@ -16,18 +18,17 @@ import {
 export class DefaultComponent implements OnInit, OnDestroy {
   private readonly _subscriptions = new Subscription();
 
+  symbols$!: Observable<MappedSymbols[]>;
+  sideBarData$!: Observable<SideBarModel[]>;
+
   sideBarOpen = false;
-  symbolsMap: MappedSymbols[] = [];
 
   constructor(
     private readonly dialog: MatDialog,
     private readonly store: DashboardStoreService,
-    private readonly router: Router
+    private readonly router: Router,
+    private translate: TranslateService
   ) {}
-
-  get symbols(): MappedSymbols[] {
-    return this.symbolsMap;
-  }
 
   get currency(): string {
     return this.store.activeSymbol;
@@ -38,16 +39,33 @@ export class DefaultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.symbols$ = this.store.symbols$;
+
     this.store.prepareSymbols();
 
     this._subscriptions.add(
       this.router.events.subscribe(this.onCloseSideBar.bind(this))
     );
-    this._subscriptions.add(
-      this.store.symbols$.subscribe(
-        (symbolsMap) => (this.symbolsMap = symbolsMap)
-      )
-    );
+    this.sideBarData$ = this.translate
+      .get(['sidebar.dashboard', 'sidebar.gainersAndLosers'])
+      .pipe(
+        map((translations: Record<string, string>) => [
+          {
+            text: translations['sidebar.dashboard'],
+            matIcon: 'dashboard',
+            queryParams: {
+              currency: this.currency,
+              interval: this.interval,
+            },
+            routerLink: '/dashboard',
+          },
+          {
+            text: translations['sidebar.gainersAndLosers'],
+            matIcon: 'trending_up',
+            routerLink: '/gainers-and-losers',
+          },
+        ])
+      );
   }
 
   ngOnDestroy(): void {
