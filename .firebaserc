@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cryptocurrency-dashboard-c7444": {
+      "hosting": {
+        "dashboard": [
+          "cryptocurrency-dashboard-c7444"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cryptocurrency-dashboard-c7444"
+  }
+}
