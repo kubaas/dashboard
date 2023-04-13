@@ -7,15 +7,15 @@
 <div class="animated-scrollbar">
   <dashboard-animated-scrollbar>
     <span
-      style="margin-left: 16px"
-      *ngFor="let symbol of symbols$ | async"
-      [ngClass]="symbol.dayChangeAmount ?? 0 >= 0 ? 'green' : 'red'"
+      class="animated-scrollbar-values"
+      *ngFor="let ticker of tickers$ | async"
+      [ngClass]="+ticker.priceChangePercent >= 0 ? 'green' : 'red'"
     >
       {{
-        symbol.symbol +
+        ticker.symbol +
           ' ' +
-          (symbol.dayChangeAmount ?? 0 > 0 ? '+' : '') +
-          (symbol.dayChangeAmount ?? 0 | number : '.2-2') +
+          (+ticker.priceChangePercent > 0 ? '+' : '') +
+          (+ticker.priceChangePercent | number : '.2-2') +
           '%'
       }}
     </span>

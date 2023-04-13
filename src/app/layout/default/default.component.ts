@@ -4,11 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SideBarModel } from 'libs/shared/src/lib/sidebar/sidebar.component';
 import { map, Observable, Subscription } from 'rxjs';
+import { Ticker24HR } from 'src/core/services/binance';
 import { HelpDialogComponent } from './../../../core/popups/help-dialog/help-dialog.component';
-import {
-  DashboardStoreService,
-  MappedSymbols,
-} from './../../../core/services/dashboard-store';
+import { DashboardStoreService } from './../../../core/services/dashboard-store';
 
 @Component({
   selector: 'dashboard-default',
@@ -18,7 +16,7 @@ import {
 export class DefaultComponent implements OnInit, OnDestroy {
   private readonly _subscriptions = new Subscription();
 
-  symbols$!: Observable<MappedSymbols[]>;
+  tickers$!: Observable<Ticker24HR[]>;
   sideBarData$!: Observable<SideBarModel[]>;
 
   sideBarOpen = false;
@@ -39,7 +37,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.symbols$ = this.store.symbols$;
+    this.tickers$ = this.store.ticker24HR$;
 
     this.store.prepareSymbols();
 

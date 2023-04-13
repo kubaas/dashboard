@@ -22,4 +22,8 @@ export class TextWithImageRendererComponent
     this.agInit(params);
     return true;
   }
+
+  onImgError(): void {
+    this.imgSource = '';
+  }
 }

@@ -24,7 +24,7 @@
 .charts {
   display: inherit;
   flex-direction: inherit;
-  flex-grow: 1;
+  height: 100%;
   margin-top: 32px;
 
   .klinesChart {
@@ -32,4 +32,14 @@
     flex-grow: 1;
     width: 100%;
   }
+}
+
+.spinner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100px;
 }
