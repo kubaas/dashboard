@@ -1,5 +1,5 @@
+import { TextWithImageRendererComponent } from '@dashboard/ag-grid';
 import { ColDef, GridOptions } from 'ag-grid-community';
-import { TextWithImageRendererComponent } from 'libs/ag-grid/src/lib/text-with-image-renderer/text-with-image-renderer.component';
 
 export namespace GainersAndLosersTableConfig {
   export const gridOptions: GridOptions = {

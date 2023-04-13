@@ -30,7 +30,8 @@
             "maxDepth": 10,
             "ignoreExternal": true
           }
-        ]
+        ],
+        "@typescript-eslint/no-namespace": "off"
       }
     },
     {

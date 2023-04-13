@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SideBarModel } from '@dashboard/libs/shared';
 import { TranslateService } from '@ngx-translate/core';
-import { SideBarModel } from 'libs/shared/src/lib/sidebar/sidebar.component';
 import { map, Observable, Subscription } from 'rxjs';
-import { Ticker24HR } from 'src/core/services/binance';
 import { HelpDialogComponent } from './../../../core/popups/help-dialog/help-dialog.component';
+import { Ticker24HR } from './../../../core/services/binance';
 import { DashboardStoreService } from './../../../core/services/dashboard-store';
 
 @Component({
