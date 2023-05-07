@@ -9,10 +9,11 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
-    "test-watch": "nx test --watch",
+    "build:prod": "nx build --configuration=production",
+    "test": "nx test --coverage",
+    "test:watch": "nx test --coverage --watch",
     "lint": "eslint --ext .ts",
-    "lint-fix": "eslint --fix --ext .ts",
+    "lint:fix": "eslint --fix --ext .ts",
     "deploy": "nx deploy"
   },
   "private": true,
@@ -32,6 +33,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@nrwl/angular": "15.8.6",
+    "@types/highcharts": "^7.0.0",
     "@types/lodash": "^4.14.191",
     "ag-grid-angular": "^29.1.0",
     "ag-grid-community": "^29.1.0",

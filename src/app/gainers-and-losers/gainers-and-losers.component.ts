@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { pick, take, takeRight } from 'lodash';
-import { interval, Observable, Subscription, tap } from 'rxjs';
+import { Observable, Subscription, interval, tap } from 'rxjs';
 import { map, mergeMap, startWith } from 'rxjs/operators';
 import { Ticker24HR } from './../../core/services/binance/binance.model';
 import { BinanceService } from './../../core/services/binance/binance.service';
@@ -43,9 +43,9 @@ export class GainersAndLosersComponent implements OnInit, OnDestroy {
     );
 
     this.symbolsWithImgs$ = this.store.symbolsWithImgs$;
-    this.gainers$ = gainerAndLosers$.pipe(map((ticker) => take(ticker, 10)));
+    this.gainers$ = gainerAndLosers$.pipe(map((tickers) => take(tickers, 10)));
     this.losers$ = gainerAndLosers$.pipe(
-      map((ticker) => takeRight(ticker, 10).reverse())
+      map((tickers) => takeRight(tickers, 10).reverse())
     );
 
     this._subscriptions.add(

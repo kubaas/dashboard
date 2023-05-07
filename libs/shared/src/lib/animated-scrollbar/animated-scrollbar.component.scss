@@ -1,10 +1,13 @@
+$scroll-length: 26100px;
+$scroll-duration: 355s;
+
 @keyframes scroll {
   from {
     transform: translate(0, 0);
   }
 
   to {
-    transform: translate(-26100px, 0);
+    transform: translate(-$scroll-length, 0);
   }
 }
 
@@ -14,13 +17,12 @@
   height: 40px;
 
   &-values {
+    animation: scroll $scroll-duration forwards 0s infinite;
+    animation-timing-function: linear;
     display: flex;
     flex-direction: row;
-    white-space: nowrap;
-    animation: scroll 355s forwards 0s infinite;
-    animation-timing-function: linear;
-    position: absolute;
-
     overflow-y: hidden;
+    position: absolute;
+    white-space: nowrap;
   }
 }
