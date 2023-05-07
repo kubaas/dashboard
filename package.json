@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "nx serve",
+    "start:prod": "nx serve --configuration=production",
     "build": "nx build",
     "build:prod": "nx build --configuration=production",
     "test": "nx test --coverage",
