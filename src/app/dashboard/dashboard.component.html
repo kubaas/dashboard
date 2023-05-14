@@ -10,14 +10,14 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div class="currencyImg">
+  <!-- <div class="currencyImg">
     <img
       *ngIf="(symbolsWithImgs$ | async)?.[currencies.value]; else placeholder"
       [src]="(symbolsWithImgs$ | async)?.[currencies.value]"
       width="56"
       height="56"
     />
-  </div>
+  </div> -->
   <mat-chip-listbox class="interval-chips" [formControl]="intervalControl">
     <mat-chip-option
       *ngFor="let interval of intervals"

@@ -1,4 +1,3 @@
-import { TextWithImageRendererComponent } from '@dashboard/ag-grid';
 import { ColDef, GridOptions } from 'ag-grid-community';
 
 export namespace GainersAndLosersTableConfig {
@@ -20,7 +19,7 @@ export namespace GainersAndLosersTableConfig {
         field: '#',
         width: 100,
         valueGetter: (node) => Number(node.node?.rowIndex) + 1,
-        cellRendererFramework: TextWithImageRendererComponent,
+        // cellRendererFramework: TextWithImageRendererComponent,
         cellRendererParams: (params: any) => ({
           imgSource: symbolsMap?.[params.node.data.symbol],
         }),
