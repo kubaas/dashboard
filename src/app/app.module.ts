@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,12 +28,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GainersAndLosersTableComponent } from './gainers-and-losers/gainers-and-losers-table/gainers-and-losers-table.component';
 import { GainersAndLosersComponent } from './gainers-and-losers/gainers-and-losers.component';
 import { DefaultComponent } from './layout/default/default.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NxWelcomeComponent,
     DashboardComponent,
     DefaultComponent,
     GainersAndLosersComponent,
@@ -51,6 +50,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
     MatChipsModule,
     MatDialogModule,
     MatDividerModule,
+    MatIconModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
